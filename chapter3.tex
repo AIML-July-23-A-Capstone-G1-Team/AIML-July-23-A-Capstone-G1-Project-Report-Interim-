@@ -7,16 +7,16 @@
 \section{Model Selection}
 \label{sec:chap3 section 1}
 
-In this section we describe about our Model Selection procedures that are followed. It involved evaluating various architectures to identify the one that best captures the patterns in the data while avoiding overfitting. The process typically includes experimenting with different network depths, layer types, and hyperparameters. In this project, we tested several models to determine the most suitable architecture for our task.
+In this section, we describe the model selection procedures that are followed. It involved evaluating various architectures to identify the one that best captures the patterns in the data while avoiding overfitting. The process typically includes experimenting with different network depths, layer types, and hyperparameters. In this project, we tested several models to determine the most suitable architecture for our task.
 
 \textbf{Model 1: Convolutional Neural Network (CNN)}
 The first model tested was a Convolutional Neural Network (CNN) designed to extract spatial hierarchies from the input images. The model architecture includes multiple convolutional layers, each followed by a ReLU activation function, pooling layers, and dropout layers to prevent overfitting. This architecture leverages the spatial structure of the images, making it well-suited for image classification tasks such as pneumonia detection. The model architecture is given in appendix \ref{app:app-A section2}.
 
 \textbf{Model 2: Enhanced CNN with Adam Optimizer}
-The second model is an enhanced version of the initial CNN, which incorporates the Adam optimizer instead of RMSprop. This change was made to potentially improve the model's convergence and overall performance. The architecture remains similar, but with fine-tuning of the optimizer parameters. The model architecture is given in appendix \ref{app:app-A section3}.
+The second model is an enhanced version of the initial CNN, which incorporates the Adam optimizer instead of RMSprop. This change was made to potentially improve the model's convergence and overall performance. The architecture remains similar but with fine-tuning of the optimizer parameters. The model architecture is given in appendix \ref{app:app-A section3}.
 
 \textbf{Model 3:  simplified architecture with fewer layers and parameters for Target Variable Prediction}
-This model uses two convolutional layers followed by max pooling, dropout, and a dense layer before the output. The results indicated more stable training and validation metrics compared to the previous models, suggesting better generalization. It should be noted that the model is trained for the \emph{Target} variable, rather than the class labels. The model architecture is given in appendix \ref{app:app-A section4}.
+This model uses two convolutional layers followed by max pooling, dropout, and a dense layer before the output. The results indicated more stable training and validation metrics compared to the previous models, suggesting better generalization. It should be noted that the model is trained for the \emph{Target} variable rather than the class labels. The model architecture is given in appendix \ref{app:app-A section4}.
 
 \section{Model Building}
 \label{sec:chap3 section 2}
@@ -36,7 +36,7 @@ Model 1 was trained on the pre-processed dataset using an 80:20 train-validation
     \item \textbf{Validation Accuracy and Loss:} The validation accuracy exhibited fluctuations but showed an overall increasing trend, suggesting that the model was able to generalize to some extent. However, the validation loss showed significant fluctuations, indicating potential overfitting.
 \end{itemize}
 
-Model 2 was trained on the pre-processed dataset using an 80:20 train-validation split. The training process involved monitoring both training and validation accuracy and loss to assess the model's performance and generalization capability. The Figure \ref{fig:chap3 figure2} illustrate the training and validation accuracy and loss over 50 epochs.
+Model 2 was trained on the pre-processed dataset using an 80:20 train-validation split. The training process involved monitoring both training and validation accuracy and loss to assess the model's performance and generalization capability. Figure \ref{fig:chap3 figure2} illustrates the training and validation accuracy and loss over 50 epochs.
 
 \begin{figure}[H]
     \centering
@@ -58,12 +58,12 @@ The model building for classification based on class labels is concluded at this
 
 Model 3 was designed with a simplified architecture compared to Models 1 and 2. It consists of:
 \begin{itemize}
-    \item Two convolutional blocks, each followed by max pooling and dropout layers to reduce overfitting.
+    \item Two convolutional blocks, each followed by max pooling and dropout layers, to reduce overfitting.
     \item A global max pooling layer to reduce the dimensionality of the feature maps.
     \item A dense layer with 128 units and ReLU activation, followed by a dropout layer to further prevent overfitting.
     \item An output layer with a softmax activation function for multi-class classification.
 \end{itemize}
-The Figure \ref{fig:chap3 figure3} shows the training and validation accuracy and loss curves for Model 3.
+Figure \ref{fig:chap3 figure3} shows the training and validation accuracy and loss curves for Model 3.
 
 \begin{figure}[H]
     \centering

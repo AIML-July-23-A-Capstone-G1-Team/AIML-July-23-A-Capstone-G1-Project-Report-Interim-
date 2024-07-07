@@ -10,7 +10,7 @@
 
 \subsection{Context}
 \label{subsec:chap1 section 1.1}
-Pneumonia is a significant health concern, responsible for over 15\% of deaths in children under 5 years old globally. In 2015, it caused 920,000 deaths among children under 5 worldwide and over 50,000 deaths in the United States. Diagnosing pneumonia accurately requires a detailed review of chest radiographs (CXR) by highly trained specialists, coupled with clinical history, vital signs, and laboratory tests. Pneumonia typically appears as increased opacity on CXRs, but other conditions such as pulmonary edema, lung cancer, and pleural effusion can complicate the diagnosis.
+Pneumonia is a significant health concern, responsible for over 15\% of deaths in children under 5 years old globally. In 2015, it caused 920,000 deaths among children under 5 worldwide and over 50,000 deaths in the United States. Diagnosing pneumonia accurately requires a detailed review of chest radiographs (CXR) by highly trained specialists, coupled with clinical history, vital signs, and laboratory tests. Pneumonia typically appears as increased opacity on CXRs, but other conditions, such as pulmonary edema, lung cancer, and pleural effusion, can complicate the diagnosis.
 
 Given the volume of images that clinicians must review, there is a pressing need for automated tools to assist in diagnosing pneumonia efficiently.
 
@@ -25,8 +25,7 @@ This problem is derived from the RSNA Pneumonia Detection Challenge on Kaggle, w
 
 \subsection{Importance}
 \label{subsec:chap1 section 1.4}
-Automating pneumonia detection can save lives by enabling quicker diagnosis and treatment, particularly in resource-limited settings. The RSNA Pneumonia Detection Challenge seeks innovative solutions from the machine learning community to address this critical healthcare need.
-
+Automating pneumonia detection can save lives by enabling quicker diagnosis and treatment, particularly in resource-limited settings.
 \section{Data Description}
 \label{sec:chap1 section 2}
 
@@ -41,7 +40,7 @@ The dataset includes images labeled as "Not Normal No Lung Opacity," indicating 
 
 \subsection{Source and Accessibility:}
 \label{subsec:chap1 section 2.3}
-The dataset is provided by the National Institutes of Health Clinical Center and is publicly available for research purposes. This rich dataset has been curated to aid in the development and validation of machine learning algorithms for pneumonia detection.
+The dataset is provided by the National Institutes of Health Clinical Center and is publicly available for research purposes. This rich dataset has been curated to aid in developing and validating machine learning algorithms for pneumonia detection.
 
 \subsection{Data Characteristics:}
 \label{subsec:chap1 section 2.4}
@@ -94,7 +93,7 @@ The images in the dataset vary in terms of quality, patient positioning, and oth
 	      \end{itemize}
 \end{itemize}
 
-The inital findings highlights the key characteristics and challenges of the dataset, including the class imbalance and the distribution of bounding boxes, which will be crucial in developing and training an effective deep learning model for pneumonia detection.
+The initial findings highlight the key characteristics and challenges of the dataset, including the class imbalance and the distribution of bounding boxes, which will be crucial in developing and training an effective deep-learning model for pneumonia detection.
 
 \section{Conclusion}
 \label{sec:chap1 section 4}
@@ -103,6 +102,4 @@ In this chapter, we introduced the critical problem of pneumonia detection using
 
 We outlined the project's objective: to design an algorithm that can automatically detect lung opacities in chest radiographs, thereby aiding in the early and accurate diagnosis of pneumonia. The dataset provided for this task comprises DICOM images with associated metadata, presenting both opportunities and challenges. The presence of a significant proportion of images labeled as “No Lung Opacity/Not Normal” and the slight class imbalance pose specific difficulties for model training and accuracy.
 
-Our initial findings highlighted the complexity of the dataset, with 39\% of the images belonging to the “No Lung Opacity/Not Normal” class, and a noticeable class imbalance. The dataset contains 26,684 unique patient IDs and 30,227 bounding boxes, with a detailed analysis revealing varying numbers of bounding boxes per patient. This distribution further complicates the development of a robust detection algorithm.
-
-In summary, Chapter 1 has laid the groundwork for understanding the scope and significance of the pneumonia detection challenge, detailed the nature and structure of the dataset, and identified key considerations for developing an effective deep learning solution. The subsequent chapters will delve into the methodology, model development, and evaluation processes, building on the foundation established here.
+Our initial findings highlighted the complexity of the dataset, with 39\% of the images belonging to the “No Lung Opacity/Not Normal” class and a noticeable class imbalance. The dataset contains 26,684 unique patient IDs and 30,227 bounding boxes, with a detailed analysis revealing varying numbers of bounding boxes per patient. This distribution further complicates the development of a robust detection algorithm.

@@ -12,11 +12,11 @@ In this chapter, we perform an exploratory data analysis (EDA) to gain a deeper 
 \subsection{Overview of the Dataset:}
 \label{subsec:chap2 section 1.1}
 
-The dataset contained two CSV files: one with class labels and patient IDs and another with bounding box coordinates. The boudning box data has the format given in Table~\ref{tab:cha-2 table1}.
+The dataset contained two CSV files: one with class labels and patient IDs and another with bounding box coordinates. The bounding box data has the format given in Table~\ref{tab:cha-2 table1}.
 
 \begin{table}[h!]
     \centering
-    \caption{Training Boudning Box Data}
+    \caption{Training Bounding Box Data}
     \label{tab:cha-2 table1}
     \begin{tabular}{c|c|c|c|c|c|c}
         \rowcolor{gray!20}
@@ -30,12 +30,12 @@ The dataset contained two CSV files: one with class labels and patient IDs and a
     \end{tabular}
 \end{table}
 
-The file, which contains the bouding boxes coordinates, provides essential information about the bounding boxes and targets associated with each patient. This dataframe we created from the CSV file includes the following columns:
+The file, which contains the coordinates of the bounding boxes, provides essential information about the bounding boxes and targets associated with each patient. This dataframe we created from the CSV file includes the following columns:
 
 \begin{itemize}
     \item \textbf{patientId:} A unique identifier for each patient.
-    \item \textbf{x:} The x-coordinate of the bounding box, indicating its horizontal position.
-    \item \textbf{y:} The y-coordinate of the bounding box, indicating its vertical position.
+    \item \textbf{x:} The x-coordinate of the bounding box indicates its horizontal position.
+    \item \textbf{y:} The y-coordinate of the bounding box indicates its vertical position.
     \item \textbf{width:} The width of the bounding box.
     \item \textbf{height:} The height of the bounding box.
     \item \textbf{Target:} A binary label indicating the presence of pneumonia (1) or its absence (0).
@@ -62,15 +62,15 @@ The second file contains the training labels data, which has the format given in
 \end{table}
 
 
-The training labels is smiliarly converted to a dataframe. The data consists of 30227 entries, with each entry corresponding to a unique entry in the bounding box data. The dataframe contains the following columns:
+The training labels are similarly converted to a dataframe. The data consists of 30227 entries, with each entry corresponding to a unique entry in the bounding box data. The dataframe contains the following columns:
 
 \begin{itemize}
     \item \textbf{patientId:} A unique identifier for each patient, which is consistent with the identifiers in the training label data.
     \item \textbf{class:} A categorical label indicating the status of the lung opacity in the chest radiographs. The possible values are:
           \begin{itemize}
               \item \textbf{No Lung Opacity / Not Normal:} Indicates that while pneumonia is not present, there is some abnormality in the image that may mimic the appearance of pneumonia.
-                    \textbf{Lung Opacity:} Indicates the presence of pneumonia.
-                    \textbf{Normal:} Indicates that there are no abnormalities or pneumonia present in the image.
+              \item \textbf{Lung Opacity:} Indicates the presence of pneumonia.
+              \item \textbf{Normal:} Indicates that there are no abnormalities or pneumonia present in the image.
           \end{itemize}
 \end{itemize}
 
@@ -78,7 +78,7 @@ The key points to note from the training labels data are:
 \begin{itemize}
     \item The dataframe includes 30,227 entries, with each entry corresponding to a unique patient ID.
     \item The class labels help in distinguishing between normal images, images with lung opacity (pneumonia), and images with other abnormalities.
-    \item There are no missing values in either the patientId or class columns, ensuring a complete dataset for analysis.
+    \item There are no missing values in either the \emph{patientId} or \emph{class} columns, ensuring a complete dataset for analysis.
 \end{itemize}
 
 The training and testing images are provided in two separate folders, with each image name corresponding to a unique patient ID. We created a dataframe that maps each patient ID to the corresponding image file path, which will be used to load and preprocess the images for model training. Table ~\ref{tab:cha-2 table3} shows the format of the dataframe containing the image file paths.
@@ -99,9 +99,9 @@ The training and testing images are provided in two separate folders, with each 
     \end{adjustbox}
 \end{table}
 
-There are 26684 images in the training dataset and 3000 images in the test dataset. The number of training images match with the number of unique patient IDs in the training labels data, indicating that each patient has an associated image.
+There are 26684 images in the training dataset and 3000 images in the test dataset. The number of training images matches the number of unique patient IDs in the training labels data, indicating that each patient has an associated image.
 
-\textbf{Bounding Box Consistency:} We confirmed that the number of bounding boxes for a patient in the bouding box dataframe matches the number of entries for that patient in the class label dataframe. This consistency indicates that the bounding box annotations are correctly aligned with the class labels.
+\textbf{Bounding Box Consistency:} We confirmed that the number of bounding boxes for a patient in the bounding box dataframe matches the number of entries for that patient in the class label dataframe. This consistency indicates that the bounding box annotations are correctly aligned with the class labels.
 
 \textbf{Unique Classes per Patient:} Each patient ID is associated with only one class, ensuring that there are no conflicting class labels for a single patient. This was verified by grouping the class label dataframe by $patientId$ and checking the number of unique classes for each patient.
 
@@ -133,7 +133,7 @@ Further, we inspected the metadata associated with the medical images. This meta
 \subsection{Distribution and skewness of Classes and Variables:}
 \label{subsec:chap2 section 1.2}
 
-Understanding the distribution of classes in the dataset is crucial for developing a robust deep learning model. The class distribution helps in identifying any imbalances that may exist, which can impact model training and performance. We first analysed the Targets in the training labels data to determine the distribution of pneumonia cases in the dataset. This is done after removing outliers, which is discussed in section~\ref{subsec:chap2 section 1.6}.
+Understanding the distribution of classes in the dataset is crucial for developing a robust deep-learning model. The class distribution helps identify imbalances that may impact model training and performance. We first analyzed the \emph{Targets} in the training labels data to determine the distribution of pneumonia cases in the dataset. This is done after removing outliers, as discussed in section~\ref{subsec:chap2 section 1.6}.
 
 \begin{figure}[H]
     \begin{center}
@@ -147,16 +147,16 @@ Understanding the distribution of classes in the dataset is crucial for developi
 
 \begin{itemize}
     \item For patients with no pneumonia, the bounding box coordinates ($x$, $y$, width, height) are null.
-    \item There are a total of 20,672 rows with null bouding box coordinates, indicating the absence of pneumonia.
-    \item The correspoindg $Target$ value for these rows is 0.
+    \item There are 20,672 rows with null bounding box coordinates, indicating the absence of pneumonia.
+    \item The corresponding $Target$ value for these rows is 0.
     \item There are a total of 9,555 rows with non-null bounding box coordinates, indicating the presence of pneumonia.
     \item The corresponding $Target$ value for these rows is 1.
 \end{itemize}
 
-The distribution of the $Target$ variable is visualized in Figure~\ref{fig:cha-2 figure1}. The plot shows a significant class imbalance, with a higher number of cases labeled as $Target = 0$ (no pneumonia) compared to $Target = 1$ (pneumonia present). This imbalance can potentially affect the performance of the model, as it may become biased towards predicting the majority class (no pneumonia) while training for predicting the $Target$.
+The distribution of the $Target$ variable is visualized in Figure~\ref{fig:cha-2 figure1}. The plot shows a significant class imbalance, with more cases labeled as $Target = 0$ (no pneumonia) than $Target = 1$ (pneumonia present). This imbalance can affect the model's performance, as it may become biased towards predicting the majority class (no pneumonia) while training for predicting the $Target$.
 To address this imbalance, techniques such as resampling (oversampling the minority class or undersampling the majority class), using class weights, or applying data augmentation can be employed.
 
-Next we analyzed the $class$ column in the training labels data to understand the distribution of class labels in the dataset. The distribution of classes is visualized in Figure~\ref{fig:cha-2 figure2}.
+Next, we analyzed the $class$ column in the training labels data to understand the distribution of class labels in the dataset. The distribution of classes is visualized in Figure~\ref{fig:cha-2 figure2}.
 
 
 \begin{figure}[H]
@@ -167,7 +167,7 @@ Next we analyzed the $class$ column in the training labels data to understand th
     \end{center}
 \end{figure}
 
-Although the overall condition distribution is skewed towards the negative condition, the negative condition itself comprises two sub-classes, which helps in moderating the imbalance. The \emph{No Lung Opacity / Not Normal class} has the highest proportion of records (39\%), followed by the \emph{Lung Opacity} class (32\%), and the \emph{Normal} class (29\%).
+Although the overall condition distribution is skewed towards the negative condition, the negative condition comprises two sub-classes, which helps moderate the imbalance. The \emph{No Lung Opacity / Not Normal class} has the highest proportion of records (39\%), followed by the \emph{Lung Opacity} class (32\%), and the \emph{Normal} class (29\%).
 
 The histograms in Figure ~\ref{fig:cha-2 figure3} and Figure ~\ref{fig:cha-2 figure4} show the distribution of the $patientAge$ within each class binned with different intervals for better understanding.
 
@@ -196,7 +196,7 @@ The histograms in Figure ~\ref{fig:cha-2 figure3} and Figure ~\ref{fig:cha-2 fig
 \textbf{Lung Opacity (Pneumonia):}
 \begin{itemize}
     \item The age distribution for the pneumonia class also peaks around 60 years but shows a more balanced spread across different age groups.
-    \item There is a noticeable presence of pneumonia cases in both younger and older patients.
+    \item There is a noticeable presence of pneumonia cases in younger and older patients.
 \end{itemize}
 
 \textbf{Normal:}
@@ -211,9 +211,9 @@ The presence of younger patients is relatively lower across all classes, which m
 \subsection{Patient Demographics and Data Diversity}
 \label{subsec:chap2 section 1.3}
 
-To gain a comprehensive understanding of the dataset, it is important to analyze patient demographics, such as age and gender, across different class labels. This analysis provides insights into the representation of different patient groups within the dataset and helps in identifying any potential biases. For this we will plot the distribution of $patientSex$ and $patientAge$ across different class labels.
+To understand the dataset, it is essential to analyze patient demographics, such as age and gender, across the various class labels. This analysis provides insights into the representation of different patient groups within the dataset and helps identify potential biases. We will plot the $patientSex$ and $patientAge$ distribution across different class labels.
 
-We have already observed in the previous section that the distribution of $patientAge$ appears roughly normal (bell-shaped) for all three class labels:\emph{No Lung Opacity / Not Normal},\emph{Lung Opacity}, and \emph{Normal}. The combined distrubtion of age across the three classes is shown in Figure~\ref{fig:cha-2 figure5}.
+We have already observed in the previous section that the distribution of $patientAge$ appears roughly normal (bell-shaped) for all three class labels:\emph{No Lung Opacity / Not Normal},\emph{Lung Opacity}, and \emph{Normal}. The combined distribution of age across the three classes is shown in Figure~\ref{fig:cha-2 figure5}.
 
 \begin{figure}[H]
     \begin{center}
@@ -225,11 +225,11 @@ We have already observed in the previous section that the distribution of $patie
 
 Figure~\ref{fig:cha-2 figure5} verifies that the peak age range is around 50 to 60 years for all distributions, indicating that this age group is most represented in the dataset. The similarity in age distribution across all three classes suggests that age cannot be a strong predictor of the class label.
 
-There is a noticeable difference in the number of male and female patients across different classes. This is illustrated in Figure~\ref{fig:cha-2 figure6} and Figure~\ref{fig:cha-2 figure7} The number of male patients suffering from pneumonia (Lung Opacity) is greater compared to female patients. In the \emph{No Lung Opacity / Not Normal} class, and the \emph{Normal} classes,  the number of male patients is also higher than that of female patients.
+There is a noticeable difference in the number of male and female patients across different classes. This is illustrated in Figure~\ref{fig:cha-2 figure6} and Figure~\ref{fig:cha-2 figure7}. The number of male patients suffering from pneumonia (Lung Opacity) is greater compared to female patients. In the \emph{No Lung Opacity / Not Normal} class and the \emph{Normal} classes,  the number of male patients is also higher than that of female patients.
 
 \begin{figure}[H]
     \begin{center}
-        \includegraphics[width = 0.6\textwidth]{figures/Figure11.png}
+        \includegraphics[width = 0.8\textwidth]{figures/Figure11.png}
         \caption{Distribution of $patientSex$ across all class labels}
         \label{fig:cha-2 figure6}
     \end{center}
@@ -237,13 +237,13 @@ There is a noticeable difference in the number of male and female patients acros
 
 \begin{figure}[H]
     \begin{center}
-        \includegraphics[width = 0.6\textwidth]{figures/Figure12.png}
+        \includegraphics[width = 0.8\textwidth]{figures/Figure12.png}
         \caption{Distribution of $patientSex$ across Target}
         \label{fig:cha-2 figure7}
     \end{center}
 \end{figure}
 
-The dataset includes two view positions: Posterior-Anterior (PA) and Anterior-Posterior (AP). The distribution of view positions shows a relatively balanced representation of PA and AP views across different age groups as shown in Figure~\ref{fig:cha-2 figure8}.
+The dataset includes two view positions: Posterior-Anterior (PA) and Anterior-Posterior (AP). The distribution of view positions shows a relatively balanced representation of PA and AP views across different age groups, as shown in Figure~\ref{fig:cha-2 figure8}.
 
 \begin{figure}[H]
     \begin{center}
@@ -253,7 +253,7 @@ The dataset includes two view positions: Posterior-Anterior (PA) and Anterior-Po
     \end{center}
 \end{figure}
 
-There is a slight predominance of PA view positions in the age range of 45 to 65 years. The balanced distribution of PA and AP view positions indicates that the dataset includes a diverse set of imaging techniques.The PA view is slightly more common in middle-aged to older patients, which could be due to the clinical preference for PA views in routine chest radiographs. The presence of both PA and AP views ensures that the model will be trained on a variety of imaging angles, improving its generalization capability.
+There is a slight predominance of PA view positions in the age range of 45 to 65 years. The balanced distribution of PA and AP view positions indicates that the dataset includes a diverse set of imaging techniques. The PA view is slightly more common in middle-aged to older patients, which could be due to the clinical preference for PA views in routine chest radiographs. The presence of both PA and AP views ensures that the model will be trained on a variety of imaging angles, improving its generalization capability.
 
 \subsection{Analysis of Bounding Boxes}
 \label{subsec:chap2 section 1.4}
@@ -262,7 +262,7 @@ Analyzing the distribution and location of bounding boxes is essential for under
 
 \textbf{Distribution of Bounding Box Center Across Age Groups:}
 
-The centers of the bounding boxes are plotted for different age groups to observe any age-related patterns in the location of lung opacities. The age groups considered are: 0-25, 25-50, 50-75, and 75-100 years. Figures ~\ref{fig:cha-2 figure9} and ~\ref{fig:cha-2 figure10} illustrate the distribution of bounding box centers across different age groups.
+The centers of the bounding boxes are plotted for different age groups to observe any age-related patterns in the location of lung opacities. The age groups considered are 0-25, 25-50, 50-75, and 75-100 years. Figures ~\ref{fig:cha-2 figure9} and ~\ref{fig:cha-2 figure10} illustrate the distribution of bounding box centers across different age groups.
 
 \begin{figure}[H]
     \begin{center}
@@ -275,7 +275,7 @@ The centers of the bounding boxes are plotted for different age groups to observ
 \begin{figure}[H]
     \begin{center}
         \includegraphics[width = 0.6\textwidth]{figures/Figure15.png}
-        \caption{Distribution of bounding box centers across different age groups}
+        \caption{Distribution of bounding box centers across different age groups (combined plot)}
         \label{fig:cha-2 figure10}
     \end{center}
 \end{figure}
@@ -287,9 +287,9 @@ The centers of the bounding boxes are plotted for different age groups to observ
     \item Age 75-100: There is a reduction in the number of lung opacities, but the central concentration pattern persists.
 \end{itemize}
 
-The Figure ~\ref{cha-2 figure10} shows combined plot of the centers of lung opacities for all ages shows a strong concentration in the central regions of the lungs. This central concentration aligns with the typical presentation of pneumonia, which often affects the lower and central lung fields. This pattern is crucial for training the model to detect pneumonia, as it indicates the regions where opacities are most likely to be found.
+Figure ~\ref{fig:cha-2 figure10} shows a combined plot of the centers of lung opacities for all ages, showing a solid concentration in the central regions of the lungs. This central concentration aligns with the typical presentation of pneumonia, which often affects the lower and central lung fields. This pattern is crucial for training the model to detect pneumonia, as it indicates the regions where opacities are most likely to be found.
 
-A similar analysis with Gender related trends is performed and the results and illustrated in Figure ~\ref{fig:cha-2 figure11} and Figure ~\ref{fig:cha-2 figure12}.
+A similar analysis with Gender-related trends is performed, and the results are illustrated in Figure ~\ref{fig:cha-2 figure11} and Figure ~\ref{fig:cha-2 figure12}.
 
 \begin{figure}[H]
     \begin{center}
@@ -307,7 +307,7 @@ A similar analysis with Gender related trends is performed and the results and i
     \end{center}
 \end{figure}
 
-The analysis shows that the spatial distribution of lung opacities is similar for both male and female patients. This indicates that the model does not need to account for significant differences in the location of opacities based on gender, simplifying the training process.
+The analysis shows that the spatial distribution of lung opacities is similar for male and female patients. This indicates that the model does not need to account for significant differences in the location of opacities based on gender, simplifying the training process.
 
 A similar analysis with View Positions also shows that the spatial distribution of lung opacities is consistent across different view positions, with a central concentration pattern observed in both PA and AP views. This consistency indicates that the model can be trained effectively on images from different view positions without significant variations in the location of lung opacities. The results are illustrated in Figure ~\ref{fig:cha-2 figure13} and Figure ~\ref{fig:cha-2 figure14}.
 
@@ -335,19 +335,15 @@ It was observed that there were no missing values in the dataset. All columns, i
 
 \textbf{Initial Outlier Detection Based on Age}
 \begin{itemize}
-    \item Initial Outlier Detection:
-          \begin{itemize}
-              \item Outliers were initially detected based on the patientAge column using a box plot analysis.
-              \item The box plot revealed a few outliers in the age data, specifically ages above 100 years, which were treated as outliers and removed from the dataset.
-          \end{itemize}
     \item Box Plot Analysis:
           \begin{itemize}
-              \item The box plot visualization for patient age showed a few data points beyond the whiskers, indicating potential outliers.
+              \item Outliers were initially detected based on the \emph{patientAge} column using a box plot analysis.
+              \item The box plot revealed a few outliers in the age data, specifically ages above 100 years, which were treated as outliers and removed from the dataset.
               \item These outliers were subsequently removed to ensure a more representative age distribution.
           \end{itemize}
 \end{itemize}
 
-The box plot in Figure ~\ref{fig:cha-2 figure15} shows the distribution of patient ages and identifies outliers in the age data. Initial outliers in patient age were identified and removed. The distribution after removal of outliers is shown in Figure ~\ref{fig:cha-2 figure16}.
+The box plot in Figure ~\ref{fig:cha-2 figure15} shows the distribution of patient ages and identifies outliers in the age data. Initial outliers in patient age were identified and removed. The distribution after the removal of outliers is shown in Figure ~\ref{fig:cha-2 figure16}.
 
 \begin{figure}[H]
     \begin{center}
@@ -365,6 +361,7 @@ The box plot in Figure ~\ref{fig:cha-2 figure15} shows the distribution of patie
     \end{center}
 \end{figure}
 
+\newpage
 \textbf{Outlier Computation based on Bounding Box Coordinates}
 \begin{itemize}
     \item Outlier Computation:
@@ -374,7 +371,7 @@ The box plot in Figure ~\ref{fig:cha-2 figure15} shows the distribution of patie
           \end{itemize}
     \item Outlier Detection:
           \begin{itemize}
-              \item Outliers were marked as points with a low likelihood of belonging to any of the Gaussian components fitted to the data.
+              \item Outliers were marked as points with a low likelihood of belonging to any Gaussian components fitted to the data.
               \item These outliers are visualized as red crosses in the scatter plots.
           \end{itemize}
     \item Handling Outliers:
@@ -384,7 +381,7 @@ The box plot in Figure ~\ref{fig:cha-2 figure15} shows the distribution of patie
           \end{itemize}
 \end{itemize}
 
-The scatter plot in Figure ~\ref{fig:cha-2 figure17} shows the centers of the bounding boxes, with outliers marked as red crosses. The initial GMM treatment identified outliers and removed them. The second scatter plot in Figure ~\ref{fig:cha-2 figure18} shows the distribution of bounding box centers after outlier removal. A second GMM analysis shows that there are a few more new outliers which are removed and the final distribution is shown in Figure ~\ref{fig:cha-2 figure19}.
+The scatter plot in Figure ~\ref{fig:cha-2 figure17} shows the centers of the bounding boxes, with outliers marked as red crosses. The initial GMM treatment identified outliers and removed them. The second scatter plot in Figure ~\ref{fig:cha-2 figure18} shows the distribution of bounding box centers after outlier removal. It can be noticed that there were new outliers when we rerun the GMM analysis for the second time. The new outliers are removed once again following the same procedure. The final distribution is shown in Figure ~\ref{fig:cha-2 figure19}.
 
 \begin{figure}[H]
     \begin{center}
@@ -410,7 +407,7 @@ The scatter plot in Figure ~\ref{fig:cha-2 figure17} shows the centers of the bo
     \end{center}
 \end{figure}
 
-The heatmap provides a density representation of the bounding box centers. The color intensity indicates the negative log-likelihood, with higher values representing lower likelihoods (potential outliers). Outliers are indicated by lower density areas (lighter colors), as they are less likely to belong to the main Gaussian components.
+The heatmap provides a density representation of the bounding box centers. The color intensity indicates the negative log-likelihood, with higher values representing lower likelihoods (potential outliers). Outliers are indicated by lower-density areas (lighter colors), as they are less likely to belong to the main Gaussian components.
 
 \subsection{Visualization of Images}
 \label{subsec:chap2 section 1.6}
@@ -457,11 +454,11 @@ Pre-processing the image data is a critical step in preparing the dataset for tr
 
 This function performs the following key tasks:
 \begin{enumerate}
-    \item Reading DICOM Images: It iterates over each row in the dataset, reading the DICOM images using the \emph{dcmread} function from the \emph{pydicom} library.
-    \item Standardizing Image Channels: It checks the shape of each image and converts it to a 3-channel format if it is not already in this format. This is crucial because DICOM images do not have color channels, and ensuring a consistent shape is important for model training.
-    \item Normalization: The pixel values of the images are normalized to a range between 0 and 255. This step enhances the contrast and makes the images more suitable for deep learning.
-    \item Resizing Images: Each image is resized to a standard size using OpenCV's \emph{cv2.resize} function. This ensures that all images have the same dimensions, which is a requirement for input to convolutional neural networks (CNNs).
-    \item Data Storage: The patient IDs, labels, images, and targets are stored in separate lists and returned as NumPy arrays. These arrays are used as inputs for the deep learning model.
+    \item \textbf{Reading DICOM Images:} It iterates over each row in the dataset, reading the DICOM images using the \emph{dcmread} function from the \emph{pydicom} library.
+    \item \textbf{Standardizing Image Channels:} It checks the shape of each image and converts it to a 3-channel format if it is not already in this format. This is crucial because DICOM images do not have color channels, and ensuring a consistent shape is important for model training.
+    \item \textbf{Normalization:} The pixel values of the images are normalized to a range between 0 and 255. This step enhances the contrast and makes the images more suitable for deep learning.
+    \item \textbf{Resizing Images:} Each image is resized to a standard size using OpenCV's \emph{cv2.resize} function. This ensures that all images have the same dimensions, which is a requirement for input to convolutional neural networks (CNNs).
+    \item \textbf{Data Storage:} The patient IDs, labels, images, and targets are stored in separate lists and returned as NumPy arrays. These arrays are used as inputs for the deep learning model.
 \end{enumerate}
 
 A processed image is depicted in Figure ~\ref{fig:cha-2 figure23}.
@@ -486,9 +483,9 @@ The data splitting process was implemented using the \emph{train\_test\_split} f
 \subsection{Summary of EDA Findings}
 \label{subsec:chap2 section 3.1}
 
-The exploratory data analysis (EDA) of the chest radiographs dataset provided crucial insights into the data's characteristics, essential for effective model training and evaluation. The dataset comprises images in DICOM format, including metadata such as patient ID, age, sex, and class labels indicating the presence or absence of pneumonia. The class distribution is moderately balanced, with 39\% of the data labeled as "No Lung Opacity / Not Normal", 32\% as "Lung Opacity", and 29\% as "Normal". The age distribution is roughly normal across all classes, peaking around the age of 50 to 60 years. Both male and female patients are included, with a slight predominance of male patients in the "Lung Opacity" class. The dataset contains two primary view positions, PA and AP, evenly distributed. Bounding boxes provided for the "Lung Opacity" class indicate regions of pneumonia, with their centers analyzed to understand typical locations within the radiographs. Initial outliers based on patient age and further outliers based on bounding box centers were detected and handled to ensure data quality. Image pre-processing involved converting images to a consistent 3-channel format, normalizing them, and resizing to a standard size for model training.
+The exploratory data analysis (EDA) of the chest radiographs dataset provided crucial insights into the data's characteristics, essential for effective model training and evaluation. The dataset comprises images in DICOM format, including metadata such as patient ID, age, sex, and class labels indicating the presence or absence of pneumonia. The class distribution is moderately balanced, with 39\% of the data labeled as "No Lung Opacity / Not Normal," 32\% as "Lung Opacity," and 29\% as "Normal". The age distribution is roughly normal across all classes, peaking around the age of 50 to 60 years. Both male and female patients are included, with a slight predominance of male patients in the "Lung Opacity" class. The dataset contains two primary view positions, PA and AP, evenly distributed. Bounding boxes provided for the "Lung Opacity" class indicate regions of pneumonia, with their centers analyzed to understand typical locations within the radiographs. Initial outliers based on patient age and further outliers based on bounding box centers were detected and handled to ensure data quality. Image pre-processing involved converting images to a consistent 3-channel format, normalizing them, and resizing them to a standard size for model training.
 
 \subsection{Impact on Model Development}
 \label{subsec:chap2 section 3.2}
 
-The EDA findings significantly influenced the model development process, guiding essential pre-processing steps and data splitting strategies. Understanding the class distributions and patient demographics helped in creating a balanced and representative training dataset, preventing model bias. The analysis of bounding boxes and handling of outliers ensured that the model focused on accurate regions within the radiographs, enhancing its detection capabilities. The decision to split the dataset into training and evaluation sets with an 80:20 ratio provided a robust framework for assessing the model's performance on unseen data, mitigating overfitting. Visualizations of class differences and bounding box locations offered valuable insights into the dataset's complexity, informing the model's architecture and training parameters. By addressing these factors during EDA, we ensured that the deep learning model for pneumonia detection is both well-trained and capable of generalizing effectively to new data, ultimately improving its accuracy and reliability in clinical settings.
+The EDA findings significantly influenced the model development process, guiding essential pre-processing steps and data-splitting strategies. Understanding the class distributions and patient demographics helped in creating a balanced and representative training dataset, preventing model bias. The analysis of bounding boxes and handling of outliers ensured that the model focused on accurate regions within the radiographs, enhancing its detection capabilities. The decision to split the dataset into training and evaluation sets with an 80:20 ratio provided a robust framework for assessing the model's performance on unseen data, mitigating overfitting. Visualizations of class differences and bounding box locations offered valuable insights into the dataset's complexity, informing the model's architecture and training parameters. By addressing these factors during EDA, we ensured that the deep learning model for pneumonia detection is both well-trained and capable of effectively generalizing new data, ultimately improving its accuracy and reliability in clinical settings.
