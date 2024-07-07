@@ -23,11 +23,20 @@
 % ------------------------------------------------------------------------------
 \chapter*{Abstract}
 
+This report presents a comprehensive exploration of pneumonia detection using computer vision techniques on chest radiographs. The study begins with an extensive Exploratory Data Analysis (EDA) to understand the dataset's structure and underlying patterns, including patient demographics and distribution of class labels. EDA findings revealed a balanced distribution of images across various patient ages, sexes, and view positions, although further data augmentation is suggested to enhance the dataset's diversity.
+
+Subsequently, multiple convolutional neural network (CNN) models were developed and evaluated to classify images based on the presence of lung opacity. Model 1, using RMSprop optimizer, showed moderate performance but indicated potential overfitting. Model 2, utilizing the Adam optimizer, improved initial training stability but faced similar overfitting challenges. Model 3, a simplified architecture, demonstrated better training and validation accuracy after implementing improvement strategies like learning rate reduction and model checkpointing. Despite these efforts, the results highlighted the necessity for further tuning and advanced techniques to achieve optimal performance.
+
+The project transitions into predicting the target variable, with plans to employ Region-based Convolutional Neural Networks (RCNN) in subsequent phases to enhance class label classification. Final model evaluation through confusion matrix and ROC curve analyses underscored the need for balancing sensitivity and specificity, with current metrics indicating areas for improvement.
+
+Future steps involve comprehensive data augmentation, exploration of advanced architectures, and the incorporation of transfer learning to improve model performance. The findings and methodologies outlined in this report lay a solid foundation for continued advancements in automated pneumonia detection, aiming towards more accurate and reliable diagnostic tools in medical imaging.
 
 \vspace{2cm}
 
 \chapter*{Acknowledgements}
-We thank our mentor Jayant for his guidance and support throughout the project. We also thank our program manager Avaneesh for his constant support and encouragement.
+We extend our heartfelt gratitude to our mentor, Jayant, for his invaluable guidance throughout this project. His insights and expertise have been instrumental in shaping our work. We also express our sincere thanks to our program manager, Avaneesh, for his constant support and encouragement, which have motivated us to strive for excellence.
+
+We are grateful to Great Learning for facilitating this learning platform and providing us with the necessary resources and tools. Their commitment to education and continuous support have significantly contributed to the success of our project.
 
 \tableofcontents
 \listoffigures
