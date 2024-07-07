@@ -3,6 +3,157 @@
 % --------------------------------------------------
 \appendix
 \chapter{Code Snippets}
+\label{app:appendix A}
+
+\section{Image Preprocessing}
+\label{app:app-A section1}
+
+\begin{minted}{python}
+# Define a function to read the DICOM images and resize them
+def readAndReshapeDicomImages(data, image_size):
+    patientIds = []
+    labels = []
+    images = []
+    targets = []
+    for i, row in notebook.tqdm(data.iterrows(), total=data.shape[0]):
+        patientId = row["patientId"]
+        label = row["class"]
+        target = row["Target"]
+        imagePath = row["path"]
+        data_row_img = dcm.dcmread(imagePath)
+        img = data_row_img.pixel_array
+        # Convert the images to 3 channels as DICOM image pixel does not have color channels
+        if len(img.shape) != 3 or (len(img.shape) == 3 and img.shape[2] != 3):
+            img = np.stack((img,) * 3, -1)
+        img = img - np.min(img)
+        img = img / np.max(img)
+        img = (img * 255).astype(np.uint8)
+        img = cv2.resize(img, (image_size, image_size), interpolation=cv2.INTER_AREA)
+        patientIds.append(patientId)
+        labels.append(label)
+        images.append(img)
+        targets.append(target)
+    return np.array(patientIds), np.array(labels), np.array(targets), np.array(images)
+\end{minted}
+
+\section{Model 1 Architecture}
+\label{app:app-A section2}
+
+\begin{minted}{python}
+model1 = Sequential()
+
+# Define the input shape
+model1.add(Input(shape=(HEIGHT, WIDTH, NUM_CHANNELS)))
+
+# First convolutional block
+model1.add(Conv2D(filters=32, kernel_size=(5, 5), padding="Same", activation="relu"))
+model1.add(Conv2D(filters=32, kernel_size=(5, 5), padding="Same", activation="relu"))
+model1.add(MaxPooling2D(pool_size=(2, 2)))
+model1.add(Dropout(0.2))
+
+# Second convolutional block
+model1.add(Conv2D(filters=64, kernel_size=(3, 3), padding="Same", activation="relu"))
+model1.add(Conv2D(filters=64, kernel_size=(3, 3), padding="Same", activation="relu"))
+model1.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
+model1.add(Dropout(0.3))
+
+# Third convolutional block
+model1.add(Conv2D(filters=128, kernel_size=(3, 3), padding="Same", activation="relu"))
+model1.add(Conv2D(filters=128, kernel_size=(3, 3), padding="Same", activation="relu"))
+model1.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
+model1.add(Dropout(0.4))
+
+# Global Max Pooling
+model1.add(GlobalMaxPooling2D())
+
+# Fully connected layer
+model1.add(Dense(256, activation="relu"))
+model1.add(Dropout(0.5))
+
+# Output layer
+model1.add(Dense(NUM_CLASSES, activation="softmax"))
+
+optimizer = RMSprop(learning_rate=0.001, rho=0.9, epsilon=1e-08)
+
+# Compile model
+model1.compile(
+    optimizer=optimizer, loss="categorical_crossentropy", metrics=["accuracy"]
+)
+
+\end{minted}
+
+\section{Model 2 Architecture}
+\label{app:app-A section3}
+
+\begin{minted}{python}
+model2 = Sequential()
+
+# Define the input shape
+model2.add(Input(shape=(HEIGHT, WIDTH, NUM_CHANNELS)))
+
+# First convolutional block
+model2.add(Conv2D(filters=32, kernel_size=(5, 5), padding="Same", activation="relu"))
+model2.add(Conv2D(filters=32, kernel_size=(5, 5), padding="Same", activation="relu"))
+model2.add(MaxPooling2D(pool_size=(2, 2)))
+model2.add(Dropout(0.2))
+
+# Second convolutional block
+model2.add(Conv2D(filters=64, kernel_size=(3, 3), padding="Same", activation="relu"))
+model2.add(Conv2D(filters=64, kernel_size=(3, 3), padding="Same", activation="relu"))
+model2.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
+model2.add(Dropout(0.3))
+
+# Third convolutional block
+model2.add(Conv2D(filters=128, kernel_size=(3, 3), padding="Same", activation="relu"))
+model2.add(Conv2D(filters=128, kernel_size=(3, 3), padding="Same", activation="relu"))
+model2.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
+model2.add(Dropout(0.4))
+
+# Global Max Pooling
+model2.add(GlobalMaxPooling2D())
+
+# Fully connected layer
+model2.add(Dense(256, activation="relu"))
+model2.add(Dropout(0.5))
+
+# Output layer
+model2.add(Dense(NUM_CLASSES, activation="softmax"))
+
+# Optimizer
+optimizer2 = Adam(learning_rate=0.001, epsilon=1e-08, decay=0.0)
+
+# Compile model
+model2.compile(
+    optimizer=optimizer2, loss="categorical_crossentropy", metrics=["accuracy"]
+)
+\end{minted}
+
+\section{Model 3 Architecture}
+\label{app:app-A section4}
+\begin{minted}{python}
+model3 = Sequential()
+model3.add(Input(shape=(HEIGHT, WIDTH, NUM_CHANNELS)))
+model3.add(Conv2D(filters=32, kernel_size=(3, 3), activation="relu"))
+model3.add(MaxPooling2D(pool_size=(2, 2)))
+model3.add(Dropout(0.25))
+model3.add(Conv2D(filters=64, kernel_size=(3, 3), activation="relu"))
+model3.add(MaxPooling2D(pool_size=(2, 2)))
+model3.add(Dropout(0.25))
+model3.add(GlobalMaxPooling2D())
+model3.add(Dense(128, activation="relu"))
+model3.add(Dropout(0.5))
+model3.add(Dense(NUM_CLASSES, activation="softmax"))
+model3.compile(optimizer="adam", loss="categorical_crossentropy", metrics=["accuracy"])
+\end{minted}
+
+\section{Fine tuning the model}
+\label{app:app-A section5}
+
+\begin{minted}{python}
+lrr = ReduceLROnPlateau(
+    monitor="val_accuracy", patience=10, verbose=1, factor=0.5, min_lr=0.00001
+)
+\end{minted}
 
 \section{Appendix section}
 

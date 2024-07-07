@@ -1,0 +1,15 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{model3} \PYG{o}{=} \PYG{n}{Sequential}\PYG{p}{()}
+\PYG{n}{model3}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Input}\PYG{p}{(}\PYG{n}{shape}\PYG{o}{=}\PYG{p}{(}\PYG{n}{HEIGHT}\PYG{p}{,} \PYG{n}{WIDTH}\PYG{p}{,} \PYG{n}{NUM\PYGZus{}CHANNELS}\PYG{p}{)))}
+\PYG{n}{model3}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Conv2D}\PYG{p}{(}\PYG{n}{filters}\PYG{o}{=}\PYG{l+m+mi}{32}\PYG{p}{,} \PYG{n}{kernel\PYGZus{}size}\PYG{o}{=}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,} \PYG{l+m+mi}{3}\PYG{p}{),} \PYG{n}{activation}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}relu\PYGZdq{}}\PYG{p}{))}
+\PYG{n}{model3}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{MaxPooling2D}\PYG{p}{(}\PYG{n}{pool\PYGZus{}size}\PYG{o}{=}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{)))}
+\PYG{n}{model3}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Dropout}\PYG{p}{(}\PYG{l+m+mf}{0.25}\PYG{p}{))}
+\PYG{n}{model3}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Conv2D}\PYG{p}{(}\PYG{n}{filters}\PYG{o}{=}\PYG{l+m+mi}{64}\PYG{p}{,} \PYG{n}{kernel\PYGZus{}size}\PYG{o}{=}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,} \PYG{l+m+mi}{3}\PYG{p}{),} \PYG{n}{activation}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}relu\PYGZdq{}}\PYG{p}{))}
+\PYG{n}{model3}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{MaxPooling2D}\PYG{p}{(}\PYG{n}{pool\PYGZus{}size}\PYG{o}{=}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{)))}
+\PYG{n}{model3}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Dropout}\PYG{p}{(}\PYG{l+m+mf}{0.25}\PYG{p}{))}
+\PYG{n}{model3}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{GlobalMaxPooling2D}\PYG{p}{())}
+\PYG{n}{model3}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Dense}\PYG{p}{(}\PYG{l+m+mi}{128}\PYG{p}{,} \PYG{n}{activation}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}relu\PYGZdq{}}\PYG{p}{))}
+\PYG{n}{model3}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Dropout}\PYG{p}{(}\PYG{l+m+mf}{0.5}\PYG{p}{))}
+\PYG{n}{model3}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Dense}\PYG{p}{(}\PYG{n}{NUM\PYGZus{}CLASSES}\PYG{p}{,} \PYG{n}{activation}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}softmax\PYGZdq{}}\PYG{p}{))}
+\PYG{n}{model3}\PYG{o}{.}\PYG{n}{compile}\PYG{p}{(}\PYG{n}{optimizer}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}adam\PYGZdq{}}\PYG{p}{,} \PYG{n}{loss}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}categorical\PYGZus{}crossentropy\PYGZdq{}}\PYG{p}{,} \PYG{n}{metrics}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}accuracy\PYGZdq{}}\PYG{p}{])}
+\end{Verbatim}

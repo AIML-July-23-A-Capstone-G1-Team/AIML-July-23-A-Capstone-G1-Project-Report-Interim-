@@ -1,0 +1,42 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{model2} \PYG{o}{=} \PYG{n}{Sequential}\PYG{p}{()}
+
+\PYG{c+c1}{\PYGZsh{} Define the input shape}
+\PYG{n}{model2}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Input}\PYG{p}{(}\PYG{n}{shape}\PYG{o}{=}\PYG{p}{(}\PYG{n}{HEIGHT}\PYG{p}{,} \PYG{n}{WIDTH}\PYG{p}{,} \PYG{n}{NUM\PYGZus{}CHANNELS}\PYG{p}{)))}
+
+\PYG{c+c1}{\PYGZsh{} First convolutional block}
+\PYG{n}{model2}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Conv2D}\PYG{p}{(}\PYG{n}{filters}\PYG{o}{=}\PYG{l+m+mi}{32}\PYG{p}{,} \PYG{n}{kernel\PYGZus{}size}\PYG{o}{=}\PYG{p}{(}\PYG{l+m+mi}{5}\PYG{p}{,} \PYG{l+m+mi}{5}\PYG{p}{),} \PYG{n}{padding}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}Same\PYGZdq{}}\PYG{p}{,} \PYG{n}{activation}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}relu\PYGZdq{}}\PYG{p}{))}
+\PYG{n}{model2}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Conv2D}\PYG{p}{(}\PYG{n}{filters}\PYG{o}{=}\PYG{l+m+mi}{32}\PYG{p}{,} \PYG{n}{kernel\PYGZus{}size}\PYG{o}{=}\PYG{p}{(}\PYG{l+m+mi}{5}\PYG{p}{,} \PYG{l+m+mi}{5}\PYG{p}{),} \PYG{n}{padding}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}Same\PYGZdq{}}\PYG{p}{,} \PYG{n}{activation}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}relu\PYGZdq{}}\PYG{p}{))}
+\PYG{n}{model2}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{MaxPooling2D}\PYG{p}{(}\PYG{n}{pool\PYGZus{}size}\PYG{o}{=}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{)))}
+\PYG{n}{model2}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Dropout}\PYG{p}{(}\PYG{l+m+mf}{0.2}\PYG{p}{))}
+
+\PYG{c+c1}{\PYGZsh{} Second convolutional block}
+\PYG{n}{model2}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Conv2D}\PYG{p}{(}\PYG{n}{filters}\PYG{o}{=}\PYG{l+m+mi}{64}\PYG{p}{,} \PYG{n}{kernel\PYGZus{}size}\PYG{o}{=}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,} \PYG{l+m+mi}{3}\PYG{p}{),} \PYG{n}{padding}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}Same\PYGZdq{}}\PYG{p}{,} \PYG{n}{activation}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}relu\PYGZdq{}}\PYG{p}{))}
+\PYG{n}{model2}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Conv2D}\PYG{p}{(}\PYG{n}{filters}\PYG{o}{=}\PYG{l+m+mi}{64}\PYG{p}{,} \PYG{n}{kernel\PYGZus{}size}\PYG{o}{=}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,} \PYG{l+m+mi}{3}\PYG{p}{),} \PYG{n}{padding}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}Same\PYGZdq{}}\PYG{p}{,} \PYG{n}{activation}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}relu\PYGZdq{}}\PYG{p}{))}
+\PYG{n}{model2}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{MaxPooling2D}\PYG{p}{(}\PYG{n}{pool\PYGZus{}size}\PYG{o}{=}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{),} \PYG{n}{strides}\PYG{o}{=}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{)))}
+\PYG{n}{model2}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Dropout}\PYG{p}{(}\PYG{l+m+mf}{0.3}\PYG{p}{))}
+
+\PYG{c+c1}{\PYGZsh{} Third convolutional block}
+\PYG{n}{model2}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Conv2D}\PYG{p}{(}\PYG{n}{filters}\PYG{o}{=}\PYG{l+m+mi}{128}\PYG{p}{,} \PYG{n}{kernel\PYGZus{}size}\PYG{o}{=}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,} \PYG{l+m+mi}{3}\PYG{p}{),} \PYG{n}{padding}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}Same\PYGZdq{}}\PYG{p}{,} \PYG{n}{activation}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}relu\PYGZdq{}}\PYG{p}{))}
+\PYG{n}{model2}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Conv2D}\PYG{p}{(}\PYG{n}{filters}\PYG{o}{=}\PYG{l+m+mi}{128}\PYG{p}{,} \PYG{n}{kernel\PYGZus{}size}\PYG{o}{=}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,} \PYG{l+m+mi}{3}\PYG{p}{),} \PYG{n}{padding}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}Same\PYGZdq{}}\PYG{p}{,} \PYG{n}{activation}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}relu\PYGZdq{}}\PYG{p}{))}
+\PYG{n}{model2}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{MaxPooling2D}\PYG{p}{(}\PYG{n}{pool\PYGZus{}size}\PYG{o}{=}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{),} \PYG{n}{strides}\PYG{o}{=}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{)))}
+\PYG{n}{model2}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Dropout}\PYG{p}{(}\PYG{l+m+mf}{0.4}\PYG{p}{))}
+
+\PYG{c+c1}{\PYGZsh{} Global Max Pooling}
+\PYG{n}{model2}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{GlobalMaxPooling2D}\PYG{p}{())}
+
+\PYG{c+c1}{\PYGZsh{} Fully connected layer}
+\PYG{n}{model2}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Dense}\PYG{p}{(}\PYG{l+m+mi}{256}\PYG{p}{,} \PYG{n}{activation}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}relu\PYGZdq{}}\PYG{p}{))}
+\PYG{n}{model2}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Dropout}\PYG{p}{(}\PYG{l+m+mf}{0.5}\PYG{p}{))}
+
+\PYG{c+c1}{\PYGZsh{} Output layer}
+\PYG{n}{model2}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Dense}\PYG{p}{(}\PYG{n}{NUM\PYGZus{}CLASSES}\PYG{p}{,} \PYG{n}{activation}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}softmax\PYGZdq{}}\PYG{p}{))}
+
+\PYG{c+c1}{\PYGZsh{} Optimizer}
+\PYG{n}{optimizer2} \PYG{o}{=} \PYG{n}{Adam}\PYG{p}{(}\PYG{n}{learning\PYGZus{}rate}\PYG{o}{=}\PYG{l+m+mf}{0.001}\PYG{p}{,} \PYG{n}{epsilon}\PYG{o}{=}\PYG{l+m+mf}{1e\PYGZhy{}08}\PYG{p}{,} \PYG{n}{decay}\PYG{o}{=}\PYG{l+m+mf}{0.0}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Compile model}
+\PYG{n}{model2}\PYG{o}{.}\PYG{n}{compile}\PYG{p}{(}
+    \PYG{n}{optimizer}\PYG{o}{=}\PYG{n}{optimizer2}\PYG{p}{,} \PYG{n}{loss}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}categorical\PYGZus{}crossentropy\PYGZdq{}}\PYG{p}{,} \PYG{n}{metrics}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}accuracy\PYGZdq{}}\PYG{p}{]}
+\PYG{p}{)}
+\end{Verbatim}

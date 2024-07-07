@@ -19,3 +19,4 @@
 *.run.xml
 
 *.log
+.vscode/

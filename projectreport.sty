@@ -21,11 +21,16 @@
 \usepackage{booktabs}
 \usepackage{caption}
 \usepackage{blindtext}
+\usepackage{colortbl}
+\usepackage{tabularx}
+\usepackage{adjustbox}
+\usepackage{truncate}
+\usepackage{minted}
 
 % ------------------------------------------------------------------------------
 % Page setup
 % ------------------------------------------------------------------------------
-\usepackage{geometry} 
+\usepackage{geometry}
 \geometry{a4paper, margin=1in, twoside}
 \usepackage{setspace}
 \doublespacing
@@ -47,25 +52,25 @@
 % Code listings
 % ------------------------------------------------------------------------------
 \usepackage{listings}
-\usepackage{xcolor}
+\usepackage[table,xcdraw]{xcolor}
 \lstdefinestyle{matlabcode}{
-	backgroundcolor=\color{gray!10},   
+	backgroundcolor=\color{gray!10},
 	commentstyle=\color{green!50!black},
 	keywordstyle=\color{blue},
 	stringstyle=\color{magenta},
 	basicstyle=\linespread{1}\footnotesize\ttfamily,
 	numberstyle=\tiny,
-	breakatwhitespace=false,         
-	breaklines=true,                 
-	captionpos=t,   
+	breakatwhitespace=false,
+	breaklines=true,
+	captionpos=t,
 	frame=single,
-	keepspaces=true,         
-	language=matlab,        
-	numbers=none,             
-	numbersep=5pt,                  
-	showspaces=false,                
+	keepspaces=true,
+	language=matlab,
+	numbers=none,
+	numbersep=5pt,
+	showspaces=false,
 	showstringspaces=false,
-	showtabs=false,                  
+	showtabs=false,
 	tabsize=2,
 	aboveskip=1em,
 	belowskip=1em,
@@ -75,40 +80,49 @@
 % ------------------------------------------------------------------------------
 % Headers and footers
 % ------------------------------------------------------------------------------	
+
+% Define custom commands to truncate chapter and section titles
+\newcommand{\truncatedchapter}[1]{%
+	\truncate{0.7\textwidth}{#1}  % Adjust the length as needed
+}
+\newcommand{\truncatedsection}[1]{%
+	\truncate{0.7\textwidth}{#1}  % Adjust the length as needed
+}
+
 \usepackage{fancyhdr}
-\pagestyle{fancy}   
+\pagestyle{fancy}
 \setlength{\headheight}{14.5pt}
 \renewcommand{\headrulewidth}{0.3pt}
-\renewcommand{\chaptermark}[1]{\markboth{\chaptername\ \thechapter.\ #1}{}}
-\renewcommand{\sectionmark}[1]{\markright{\thesection.\ #1}}   
-\fancyhead[LE,RO]{\rightmark}
-\fancyhead[LO,RE]{\leftmark}
+\renewcommand{\chaptermark}[1]{\markboth{\truncatedchapter{\chaptername\ \thechapter.\ #1}}{}}
+\renewcommand{\sectionmark}[1]{\markright{\truncatedsection{\thesection.\ #1}}}
+\fancyhead[LE,RO]{\markright}
+% \fancyhead[RE]{}
 
 % ------------------------------------------------------------------------------
 % Title page
 % ------------------------------------------------------------------------------
 \renewcommand{\maketitle}{
-    \thispagestyle{empty}
-    \begin{center}
-    	\vspace*{2cm}
-    	\includegraphics[width = 4cm]{Images/logo-GL.png} \par
-    	\vspace{2cm}
-    	\textbf{\Large{AIML July 23 A Capstone G1}} \par
-    	\vspace{1cm}
-    	\textbf{\LARGE{\name}} \par
-    	\vspace{1cm}
-    	\textbf{\Large \course} \par
-    	\vspace{1cm}
-    	\textbf{\Huge \projecttitle} \par
-    	\vspace{1cm}
-    	\textbf{\Large \submissiondate} \par
-    	\vfill 
-    	\textbf{\Large PGP AIML}
-    	\vspace{1cm}
-    \end{center}
-    
-    \pagenumbering{roman}
-    \setcounter{page}{0}
+	\thispagestyle{empty}
+	\begin{center}
+		\vspace*{2cm}
+		\includegraphics[width = 4cm]{Images/logo-GL.png} \par
+		\vspace{2cm}
+		\textbf{\Large{AIML July 23 A Capstone G1}} \par
+		\vspace{1cm}
+		\textbf{\LARGE{\name}} \par
+		\vspace{1cm}
+		\textbf{\Large \course} \par
+		\vspace{1cm}
+		\textbf{\Huge \projecttitle} \par
+		\vspace{1cm}
+		\textbf{\Large \submissiondate} \par
+		\vfill
+		\textbf{\Large PGP AIML}
+		\vspace{1cm}
+	\end{center}
+
+	\pagenumbering{roman}
+	\setcounter{page}{0}
 }
 
 % ------------------------------------------------------------------------------
@@ -120,9 +134,9 @@
 \newtheorem{lemma}[theorem]{Lemma}
 
 \newtheoremstyle{break}%
-    {}{}%
-    {}{}%
-    {\bfseries}{}% % Note that final punctuation is omitted.
-    {\newline}{}
+{}{}%
+{}{}%
+{\bfseries}{}% % Note that final punctuation is omitted.
+{\newline}{}
 \theoremstyle{break}
 \newtheorem{example}{Example}[chapter]

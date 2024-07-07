@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{lrr} \PYG{o}{=} \PYG{n}{ReduceLROnPlateau}\PYG{p}{(}
+    \PYG{n}{monitor}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}val\PYGZus{}accuracy\PYGZdq{}}\PYG{p}{,} \PYG{n}{patience}\PYG{o}{=}\PYG{l+m+mi}{10}\PYG{p}{,} \PYG{n}{verbose}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{factor}\PYG{o}{=}\PYG{l+m+mf}{0.5}\PYG{p}{,} \PYG{n}{min\PYGZus{}lr}\PYG{o}{=}\PYG{l+m+mf}{0.00001}
+\PYG{p}{)}
+\end{Verbatim}
